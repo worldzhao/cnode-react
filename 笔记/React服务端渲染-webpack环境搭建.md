@@ -54,7 +54,8 @@ categories: React
 
 ![ReactSSR.png](http://upload-images.jianshu.io/upload_images/4869616-74fe294d4032c85a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-## 工程开发环境搭建
+## 工程开发环境搭建 - webpack
+
 ### 工程目录
 ![工程目录](http://upload-images.jianshu.io/upload_images/4869616-fa701b6252eec898.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -77,7 +78,7 @@ categories: React
     2. util
 
         1. dev-static 服务端开发环境运行文件
-5. babelrc： babel配置文件 
+5. babelrc： babel配置文件
 ### package.json
 依赖：
 
@@ -151,8 +152,8 @@ if (module.hot) {
 客户端的webpack配置文件即我们平常**开发**单页面应用的配置，注意此处为了使结构更清晰只保留了必须的部分，并且使用了react-hot-loader保证开发环境更为舒适。
 
 难点：
-1. publicPath 
-2. react-hot-loader 
+1. publicPath
+2. react-hot-loader
 3. webpack-dev-server
 ```js
 const path = require('path');
@@ -383,7 +384,7 @@ serverCompiler = webpack(serverConfig);
 serverCompiler.outputFileSystem = mfs;
 // 监听entry处的文件是否有变动 若有变动重新打包
 serverCompiler.watch({}, (err, stats) => {
-  if (err) 
+  if (err)
     throw err;
   stats = stats.toJson();
   // 打印错误和警告信息
@@ -422,7 +423,14 @@ module.exports = function (app) {
 }
 ```
 
-至此，我们完成了一个最基本的环境搭建，当然，只是解决了开发环境的问题，路由啥的，数据啥的都还没弄呢。
+至此，我们完成了一个最基本的环境搭建。
 
 未完待续。
 
+注：如果不对webpack进行配置，我们在代码中导入jsx文件时如果不写后缀`.jsx`，webpack会自动去寻找以`.js`结尾的文件，如果找不到则报错，所以需要进行如下配置：
+
+```js
+resolve: {
+  extension: ['.js', '.jsx']
+},
+```

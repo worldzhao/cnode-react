@@ -7,6 +7,10 @@ module.exports = {
     // '/public/app.js'
     publicPath: '/public/'
   },
+  // 对以下后缀的文件无需可以省略后缀名
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {
