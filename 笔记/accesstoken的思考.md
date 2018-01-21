@@ -1,0 +1,16 @@
+# 关于cnodejs提供的api中accesstoken的一点思考
+
+cnode.js的api的部分接口需要用户的accesstoken才能进行访问，看了许多cnodejs的前端项目，发现大部分处理都是用户将accesstoken输入后，随后去cnodejs的accesstoken验证接口进行验证,通过后直接保存在本地localStorage，以后需要时取出即可。
+
+这算一个登陆功能吗？很明显，不算，这仅仅是将api请求所需要的某个特殊字段交由用户输入了而已，而且安全性堪忧（不过毕竟也没有后台支持嘛）。
+
+其实我们可以引入一个node中间层来使我们的服务更为完善。
+
+除了cnode提供的api接口，可以自己搭建一个express服务器，利用这个服务器来实现一个完善的登录功能。
+
+1. accesstoken存储在服务器session中，浏览器端只储存cookie
+2. 浏览器通过cookie维持登录状态
+3. 服务器进行api接口转发
+
+如此一来，accesstoken在用户输入完毕之后，浏览器端就无法得到accesstoken了，安全性up.
+

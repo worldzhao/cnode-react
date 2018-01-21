@@ -49,6 +49,9 @@ if (isDev) {
     // 解决刷新404问题（服务端没有前端路由指向的文件） 全都返回index.html
     historyApiFallback: {
       index: '/public/index.html'
+    },
+    proxy: {
+      '/api': 'http://localhost:3333'
     }
   }
   config
